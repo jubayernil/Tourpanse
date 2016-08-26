@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Budget : 15000"
+            android:textSize="18dp"
+            android:id="@+id/showEventEstimatedBudgetTV"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Spent : 15000"
+            android:textSize="18dp"
+            android:id="@+id/showEventSpentAmountTV"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Remaining : 15000"
+            android:textSize="18dp"
+            android:id="@+id/showRemainingAmountTV"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/showListOfExpenseOfEvent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Tourpanse</string>
+    <string name="not_register_create_account">Not Register? Create Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="full_name_hint">Jhon Cena</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_number_hint">+449385773</string>
+    <string name="email">Email</string>
+    <string name="email_hint">jhoncena@abc.com</string>
+    <string name="password">Password</string>
+    <string name="password_hint">........</string>
+    <string name="clear">Clear</string>
+    <string name="save">Save</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="registration">Registration</string>
+    <string name="tour_detail">Tour Detail</string>
+    <string name="confirm_password">Confirm Password</string>
+</resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activity.AddNewEventActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tour Location"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/eventLocationET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_border_red"
+        android:gravity="left"
+        android:hint="Enter Location"
+        android:padding="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Travel Starting Date"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/travelStartingDateTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_border_red"
+        android:gravity="left"
+        android:padding="10dp"
+        android:text="Enter Date"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Tour Duration Day"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/travelDurationET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_border_red"
+        android:gravity="left"
+        android:hint="5 Days"
+        android:padding="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Estimated Budget"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/estimatedBudgetET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_border_red"
+        android:gravity="left"
+        android:hint="Estimated Budget"
+        android:padding="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/saveEventButton"
+        android:onClick="saveEvent"
+        android:text="Create Tour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/red_border_black"
+        android:padding="20dp"
+        android:textAllCaps="false"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
+</LinearLayout>

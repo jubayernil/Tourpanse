@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="50dp"
+    android:paddingBottom="0dp"
+    android:background="@drawable/black_border_white"
+    android:paddingTop="0dp" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/childOneLayout"
+            android:background="@color/colorBlackLight"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/icon_moment"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/createMomentTv"
+                android:textSize="20sp"
+                android:text="Create Moment"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/childTwoLayout"
+            android:background="@color/colorBlackLight"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/icon_expense"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/addExpenseTv"
+                android:textSize="20sp"
+                android:text="Add Expense"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/childThreeLayout"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorBlackLight"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/icon_event_detail"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/tourDetailTv"
+                android:textSize="20sp"
+                android:text="@string/tour_detail"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/childFourLayout"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorBlackLight"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/icon_view_moment"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/viewMomentTv"
+                android:textSize="20sp"
+                android:text="View Moments"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

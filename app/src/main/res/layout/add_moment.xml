@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Add New Moment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/red_border_black"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:text="Location Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorRed"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/momentLocation"
+            android:hint="Location Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_border_red"
+            android:padding="5dp"
+            android:textAlignment="textStart"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
+
+        <TextView
+            android:text="Moment Remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorRed"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/momentRemark"
+            android:hint="Remark"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/black_border_red"
+            android:padding="5dp"
+            android:gravity="start"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
+
+        <TextView
+            android:text="Image Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorRed"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/momentImageCaption"
+            android:hint="Give a Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/black_border_red"
+            android:padding="5dp"
+            android:textAlignment="textStart"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
+
+
+        <TextView
+            android:text="Select a Image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorRed"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/imageSelectorTV"
+            android:text="Browse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/black_border_red"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/imagePathTextView"
+            android:layout_width="match_parent"
+            android:layout_height="30sp"
+            android:background="#ddd"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/saveMoment"
+            android:text="Save Moment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/red_border_black"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
