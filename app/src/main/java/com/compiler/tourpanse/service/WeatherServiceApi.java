@@ -1,7 +1,7 @@
 package com.compiler.tourpanse.service;
 
 import com.compiler.tourpanse.pojo.CurrentWeatherResponse;
-import com.compiler.tourpanse.pojo.WeatherForecaseResponse;
+import com.compiler.tourpanse.pojo.WeatherForecastResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -14,5 +14,5 @@ public interface WeatherServiceApi {
     @GET
     Call<CurrentWeatherResponse> getAllWeather(@Url String userUrl);
     @GET
-    Call<WeatherForecaseResponse> getAllWeatherForecast(@Url String url);
+    Call<WeatherForecastResponse> getAllWeatherForecast(@Url String url);
 }

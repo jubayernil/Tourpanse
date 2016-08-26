@@ -1,21 +1,22 @@
 package com.compiler.tourpanse.activity;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.compiler.tourpanse.R;
-import com.compiler.tourpanse.fragment.CurrentWeatherFragment;
-import com.compiler.tourpanse.fragment.ForecastWeatherFragment;
+import com.compiler.tourpanse.adapter.ForecastListAdapter;
 import com.compiler.tourpanse.pojo.CurrentWeatherResponse;
+import com.compiler.tourpanse.pojo.WeatherForecastResponse;
+import com.compiler.tourpanse.pojo.WeatherList;
 import com.compiler.tourpanse.service.Constant;
 import com.compiler.tourpanse.service.WeatherServiceApi;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,14 +26,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherActivity extends AppCompatActivity {
 
-    WeatherServiceApi weatherServiceApi;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    CurrentWeatherFragment currentWeatherFragment;
-    ForecastWeatherFragment forecastWeatherFragment;
+    ImageView weatherImageIv;
+    TextView tempTv, weatherSummaryTv, weatherDetailTv;
+    ListView forecastListView;
 
-    TextView currentTv, forecastTv;
-    LinearLayout weatherContainerLinearLayout;
+    WeatherServiceApi weatherServiceApi;
+    ForecastListAdapter adapter;
 
     String cityName;
     String tempUnit = Constant.CELSIUS_UNIT;
@@ -42,41 +41,15 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
-        currentTv = (TextView) findViewById(R.id.currentTv);
-        forecastTv = (TextView) findViewById(R.id.forecastTv);
-
-        fragmentManager=getFragmentManager();
-        fragmentTransaction=fragmentManager.beginTransaction();
-        currentWeatherFragment = new CurrentWeatherFragment();
-
-        fragmentTransaction.add(R.id.weatherContainerLinearLayout, currentWeatherFragment);
-        fragmentTransaction.commit();
-
-        currentTv.setBackgroundResource(R.color.colorWhite);
-        forecastTv.setBackgroundResource(R.color.colorRed);
+        weatherImageIv = (ImageView) findViewById(R.id.weatherImageIv);
+        tempTv = (TextView) findViewById(R.id.tempTv);
+        weatherSummaryTv = (TextView) findViewById(R.id.weatherSummaryTv);
+        weatherDetailTv = (TextView) findViewById(R.id.weatherDetailTv);
+        forecastListView = (ListView) findViewById(R.id.forecastListView);
 
         networkLibraryInitialize();
         getCurrentWeatherData();
-    }
-
-    public void replace(View view) {
-        Fragment newFragment = null;
-        if(view.getId()==R.id.currentTv){
-            newFragment=new CurrentWeatherFragment();
-            currentTv.setBackgroundResource(R.color.colorWhite);
-            forecastTv.setBackgroundResource(R.color.colorRed);
-        }else if(view.getId()==R.id.forecastTv){
-            newFragment=new ForecastWeatherFragment();
-            forecastTv.setBackgroundResource(R.color.colorWhite);
-            currentTv.setBackgroundResource(R.color.colorRed);
-        }
-
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.weatherContainerLinearLayout,newFragment);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.addToBackStack("");
-        fragmentTransaction.commit();
+        getWeatherForecastData();
     }
 
     private void getCurrentWeatherData() {
@@ -87,15 +60,45 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
                 CurrentWeatherResponse currentWeatherResponse = response.body();
-                Log.e("Weather", "onResponse: "+currentWeatherResponse.getMain().getTemp()+" City: "+cityName);
+                Log.e("Weather", "onResponse: " + currentWeatherResponse.getMain().getTemp() + " City: " + cityName);
                 /*Bundle tempData = new Bundle();
                 tempData.putString("tempData", String.valueOf(currentWeatherResponse.getMain().getTemp()));
                 currentWeatherFragment.setArguments(tempData);*/
+                Picasso.with(getApplicationContext()).load(currentWeatherResponse.getWeather().get(0).getIcon()).into(weatherImageIv);
+                tempTv.setText(String.valueOf(currentWeatherResponse.getMain().getTemp())+(char) 0x00B0+"C");
+                weatherSummaryTv.setText(currentWeatherResponse.getWeather().get(0).getMain());
+                weatherDetailTv.setText(currentWeatherResponse.getWeather().get(0).getDescription());
             }
 
             @Override
             public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
 
+            }
+        });
+    }
+
+    private void getWeatherForecastData() {
+        cityName = getIntent().getStringExtra("city");
+        String url = "forecast/daily?q="+cityName+"&mode=json&units=metric&cnt=7&appid=20c5d5dba6ab6ff1a57258e71ca55a0e";
+        Call<WeatherForecastResponse> forecastResponseCall = weatherServiceApi.getAllWeatherForecast(url);
+        forecastResponseCall.enqueue(new Callback<WeatherForecastResponse>() {
+            @Override
+            public void onResponse(Call<WeatherForecastResponse> call, Response<WeatherForecastResponse> response) {
+                WeatherForecastResponse wfr = response.body();
+                ArrayList<WeatherList> weatherLists = new ArrayList<WeatherList>();
+                weatherLists = (ArrayList<WeatherList>) wfr.getList();
+//TODO: here to add list view
+                adapter = new ForecastListAdapter(WeatherActivity.this, weatherLists);
+                forecastListView.setAdapter(adapter);
+                for (WeatherList weatherList : weatherLists) {
+                    Log.d("ListResult", "onResponse: " + weatherList.getDt() + " clouds " + weatherList.getClouds()
+                            + " getDeg " + weatherList.getDeg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherForecastResponse> call, Throwable t) {
+                Log.e("onFailure", "onFailure: " + t);
             }
         });
     }

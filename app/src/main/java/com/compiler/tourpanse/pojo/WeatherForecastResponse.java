@@ -11,7 +11,7 @@ import java.util.TimeZone;
 /**
  * Created by User on 8/8/2016.
  */
-public class WeatherForecaseResponse {
+public class WeatherForecastResponse {
     @SerializedName("city")
     @Expose
     private City city;
