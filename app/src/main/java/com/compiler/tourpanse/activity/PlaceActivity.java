@@ -3,9 +3,11 @@ package com.compiler.tourpanse.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.compiler.tourpanse.R;
+import com.compiler.tourpanse.adapter.PlaceListAdapter;
 import com.compiler.tourpanse.pojoplace.PlaceResponse;
 import com.compiler.tourpanse.pojoplace.Result;
 import com.compiler.tourpanse.service.Constant;
@@ -22,8 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PlaceActivity extends AppCompatActivity {
 
     PlaceServiceApi placeServiceApi;
+    PlaceListAdapter placeListAdapter;
 
-    TextView placeNameTv, placeLatitudeTv, placeLongitudeTv;
+    ListView placeListView;
 
     int placeRadius;
     String placeType;
@@ -34,9 +37,7 @@ public class PlaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
 
-        placeNameTv = (TextView) findViewById(R.id.placeNameTv);
-        placeLatitudeTv = (TextView) findViewById(R.id.placeLatitudeTv);
-        placeLongitudeTv = (TextView) findViewById(R.id.placeLongitudeTv);
+        placeListView = (ListView) findViewById(R.id.placeListView);
 
         networkLibraryInitialize();
         getNearbyPlace();
@@ -57,20 +58,18 @@ public class PlaceActivity extends AppCompatActivity {
                 PlaceResponse placeResponse = response.body();
                 String placeName;
                 double lat, lng;
+                String openNow = null;
                 ArrayList<Result> results = new ArrayList<Result>();
                 results = (ArrayList<Result>) placeResponse.getResults();
-                /*placeName = placeResponse.getResults().get(0).getName();
-                lat = placeResponse.getResults().get(0).getGeometry().getLocation().getLat();
-                lng = placeResponse.getResults().get(0).getGeometry().getLocation().getLng();*/
-                /*for (Result result : results) {
-                    int i = 0;
-                    Log.e("PlaceApi", "onResponse: " + results.get(i).getName());
-                    i++;
-                }*/
+
+                placeListAdapter = new PlaceListAdapter(PlaceActivity.this, results);
+                placeListView.setAdapter(placeListAdapter);
+
                 for (int i = 0; i < results.size(); i++){
                     Log.e("PlaceApi", i+"----------------------------------------------"+i);
                     Log.e("PlaceApi", "Name: " + results.get(i).getName());
-                    Log.e("PlaceApi", "Lat and Lng "+ results.get(i).getGeometry().getLocation().getLat()+","+results.get(i).getGeometry().getLocation().getLng());
+                    Log.e("PlaceApi", "Lat and Lng: "+ results.get(i).getGeometry().getLocation().getLat()+","+results.get(i).getGeometry().getLocation().getLng());
+                    Log.e("PlaceApi", "Address: "+ results.get(i).getVicinity() );
                     Log.e("PlaceApi", i+"----------------------------------------------"+i);
                 }
 

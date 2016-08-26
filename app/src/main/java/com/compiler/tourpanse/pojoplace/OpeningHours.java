@@ -24,6 +24,7 @@ public class OpeningHours {
         return openNow;
     }
 
+
     /**
      * 
      * @param openNow
