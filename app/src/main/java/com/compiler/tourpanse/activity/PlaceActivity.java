@@ -3,8 +3,13 @@ package com.compiler.tourpanse.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.compiler.tourpanse.R;
 import com.compiler.tourpanse.adapter.PlaceListAdapter;
@@ -27,10 +32,72 @@ public class PlaceActivity extends AppCompatActivity {
     PlaceListAdapter placeListAdapter;
 
     ListView placeListView;
+    Spinner placeTypeSpinner;
 
     int placeRadius;
     String placeType;
     double latitude, longitude;
+
+    String[] placeTypeArray = {
+            "accounting",
+            "airport",
+            "amusement_park",
+            "aquarium",
+            "art_gallery",
+            "atm",
+            "bakery",
+            "bank",
+            "bar",
+            "beauty_salon",
+            "bicycle_store",
+            "book_store",
+            "bowling_alley",
+            "bus_station",
+            "cafe",
+            "casino",
+            "clothing_store",
+            "department_store",
+            "doctor",
+            "embassy",
+            "fire_station",
+            "food",
+            "gym",
+            "hospital",
+            "jewelry_store",
+            "local_government_office",
+            "mosque",
+            "museum",
+            "night_club",
+            "painter",
+            "park",
+            "parking",
+            "pharmacy",
+            "police",
+            "post_office",
+            "restaurant",
+            "school",
+            "shoe_store",
+            "shopping_mall",
+            "spa",
+            "stadium",
+            "storage",
+            "store",
+            "taxi_stand",
+            "train_station",
+            "transit_station",
+            "travel_agency",
+            "university",
+            "veterinary_care",
+            "zoo"
+    };
+
+    public String getPlaceType() {
+        return placeType;
+    }
+
+    public void setPlaceType(String placeType) {
+        this.placeType = placeType;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +105,19 @@ public class PlaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place);
 
         placeListView = (ListView) findViewById(R.id.placeListView);
+        placeTypeSpinner = (Spinner) findViewById(R.id.placeTypeSpinner);
 
+        ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,placeTypeArray);
+        placeTypeSpinner.setAdapter(adapter);
         networkLibraryInitialize();
-        getNearbyPlace();
     }
 
     private void getNearbyPlace() {
         placeRadius = 3000;
-        placeType = "restaurant";
         latitude = 23.8204245;
         longitude = 90.4330839;
 
-        String userUrl = "json?location="+latitude + "," + longitude + "&radius=" + placeRadius + "&type=" + placeType + Constant.PLACE_API_KEY;
+        String userUrl = "json?location="+latitude + "," + longitude + "&radius=" + placeRadius + "&type=" + getPlaceType() + Constant.PLACE_API_KEY;
 
         Call<PlaceResponse> placeResponseCall = placeServiceApi.getAllPlace(userUrl);
         placeResponseCall.enqueue(new Callback<PlaceResponse>() {
@@ -89,5 +157,10 @@ public class PlaceActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         placeServiceApi = retrofit.create(PlaceServiceApi.class);
+    }
+
+    public void getPlaceNearby(View view) {
+        setPlaceType(placeTypeSpinner.getSelectedItem().toString());
+        getNearbyPlace();
     }
 }
