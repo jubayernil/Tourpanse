@@ -39,7 +39,6 @@ public class AddEventExpenseMoment extends AppCompatActivity {
     private Button listExpense;
     private Button addMoment;
     private Button listMoment;
-    private Button viewGallery;
     private TextView imagePathTextView;
 
     private SaveUserCredentialsToSharedPreference sfData;
@@ -78,7 +77,6 @@ public class AddEventExpenseMoment extends AppCompatActivity {
         listExpense = (Button) findViewById(R.id.listExpense);
         addMoment = (Button) findViewById(R.id.addMoment);
         listMoment = (Button) findViewById(R.id.viewMoment);
-        viewGallery = (Button) findViewById(R.id.viewGallery);
         showEventTitle.setText(event.getEventLocation());
 
         addExpense.setOnClickListener(new View.OnClickListener() {
@@ -341,5 +339,9 @@ public class AddEventExpenseMoment extends AppCompatActivity {
         } catch (ActivityNotFoundException e) {
             // Do nothing for now
         }
+    }
+
+    public void goToPlace(View view) {
+        startActivity(new Intent(AddEventExpenseMoment.this, PlaceActivity.class));
     }
 }

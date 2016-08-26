@@ -199,8 +199,4 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         intent.putExtra("city", getCity());
         startActivity(intent);
     }
-
-    public void goToPlace(View view) {
-        startActivity(new Intent(MainActivity.this, PlaceActivity.class));
-    }
 }
