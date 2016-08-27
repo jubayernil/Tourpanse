@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         finish();
     }
 
-    public void getWeatherFromMenu(MenuItem item) {
+    /*public void getWeatherFromMenu(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
         intent.putExtra("city", getCity());
         startActivity(intent);
@@ -222,5 +222,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public void getLogoutFromMenu(MenuItem item) {
         saveUserCredentialsToSharedPreference.saveUserCredentials(0);
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.weatherMenu:
+                Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
+                intent.putExtra("city", getCity());
+                startActivity(intent);
+                return true;
+
+            case R.id.logoutMenu:
+                saveUserCredentialsToSharedPreference.saveUserCredentials(0);
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }
