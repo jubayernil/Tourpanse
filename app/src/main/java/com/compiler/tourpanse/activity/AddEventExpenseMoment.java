@@ -158,6 +158,7 @@ public class AddEventExpenseMoment extends AppCompatActivity {
                 for (Expense expense : expenses) {
                     cost += expense.getAmount();
                 }
+                int totalMoney = Integer.parseInt(event.getEstimatedBudget());
                 double remainingAmount = Double.parseDouble(event.getEstimatedBudget()) - cost;
                 showEventEstimatedBudgetTV.setText("Budget\n" + event.getEstimatedBudget());
                 showEventSpentAmountTV.setText("Spent\n" + cost);
@@ -257,7 +258,7 @@ public class AddEventExpenseMoment extends AppCompatActivity {
 
                         .
 
-                                setPositiveButton("", new DialogInterface.OnClickListener() {
+                                setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Toast.makeText(getApplicationContext(), ".", Toast.LENGTH_SHORT).show();

@@ -166,20 +166,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
-                android:onClick="clear"
-                android:id="@+id/clearBtn"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textAllCaps="false"
-                android:background="@drawable/black_border_red"
-                android:text="@string/clear"
-                android:textColor="@color/colorWhite"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-            <Button
                 android:onClick="save"
                 android:id="@+id/saveBtn"
                 android:textColor="@color/colorWhite"
