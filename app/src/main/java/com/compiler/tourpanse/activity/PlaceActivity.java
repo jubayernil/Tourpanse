@@ -185,6 +185,7 @@ public class PlaceActivity extends AppCompatActivity implements GoogleApiClient.
                             Intent mapIntent = new Intent(PlaceActivity.this, MapsActivity.class);
                             mapIntent.putExtra("lat", finalResults.get(position).getGeometry().getLocation().getLat().toString());
                             mapIntent.putExtra("lng", finalResults.get(position).getGeometry().getLocation().getLng().toString());
+                            mapIntent.putExtra("name", finalResults.get(position).getName());
                             startActivity(mapIntent);
                         }
                     });
