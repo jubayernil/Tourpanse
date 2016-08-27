@@ -31,6 +31,10 @@ public class User {
         this.emergencyContactNumber = emergencyContactNumber;
     }
 
+    public User(){
+
+    }
+
     public int getUserId() {
         return userId;
     }

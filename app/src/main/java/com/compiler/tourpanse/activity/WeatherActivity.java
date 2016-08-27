@@ -1,5 +1,6 @@
 package com.compiler.tourpanse.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,7 +66,7 @@ public class WeatherActivity extends AppCompatActivity {
                 tempData.putString("tempData", String.valueOf(currentWeatherResponse.getMain().getTemp()));
                 currentWeatherFragment.setArguments(tempData);*/
                 Picasso.with(getApplicationContext()).load(currentWeatherResponse.getWeather().get(0).getIcon()).into(weatherImageIv);
-                tempTv.setText(String.valueOf(currentWeatherResponse.getMain().getTemp())+(char) 0x00B0+"C");
+                tempTv.setText(String.valueOf((int)Math.ceil(currentWeatherResponse.getMain().getTemp())) + (char) 0x00B0 + "C");
                 weatherSummaryTv.setText(currentWeatherResponse.getWeather().get(0).getMain());
                 weatherDetailTv.setText(currentWeatherResponse.getWeather().get(0).getDescription());
             }
@@ -79,7 +80,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     private void getWeatherForecastData() {
         cityName = getIntent().getStringExtra("city");
-        String url = "forecast/daily?q="+cityName+"&mode=json&units=metric&cnt=7&appid=20c5d5dba6ab6ff1a57258e71ca55a0e";
+        String url = "forecast/daily?q=" + cityName + "&mode=json&units=metric&cnt=7&appid=20c5d5dba6ab6ff1a57258e71ca55a0e";
         Call<WeatherForecastResponse> forecastResponseCall = weatherServiceApi.getAllWeatherForecast(url);
         forecastResponseCall.enqueue(new Callback<WeatherForecastResponse>() {
             @Override
@@ -109,5 +110,10 @@ public class WeatherActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         weatherServiceApi = retrofit.create(WeatherServiceApi.class);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

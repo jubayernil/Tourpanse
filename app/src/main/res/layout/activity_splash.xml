@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_gravity="center"
-    android:background="#199E5E"
     tools:context="activity.SplashActivity">
 
     <ImageView
@@ -19,9 +18,7 @@
         android:fontFamily="cursive"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:textSize="40dp"
-        android:textColor="#ffffff"
-        android:text="Meeting Scheduler"
+        android:textColor="@color/colorRed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

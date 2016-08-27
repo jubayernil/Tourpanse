@@ -344,4 +344,9 @@ public class AddEventExpenseMoment extends AppCompatActivity {
     public void goToPlace(View view) {
         startActivity(new Intent(AddEventExpenseMoment.this, PlaceActivity.class));
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }

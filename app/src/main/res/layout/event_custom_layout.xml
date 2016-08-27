@@ -21,7 +21,6 @@
         android:id="@+id/showRemainingDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2 Days, 10 Hours, 15 Minutes"
         android:paddingBottom="10dp"
         android:textColor="@color/colorBlack"
         android:textAppearance="?android:attr/textAppearanceMedium"/>

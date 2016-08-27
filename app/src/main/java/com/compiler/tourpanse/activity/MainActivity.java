@@ -14,6 +14,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -25,6 +28,7 @@ import com.compiler.tourpanse.adapter.EventAdapter;
 import com.compiler.tourpanse.dbhelper.EventDataSource;
 import com.compiler.tourpanse.helper.SaveUserCredentialsToSharedPreference;
 import com.compiler.tourpanse.models.Event;
+import com.compiler.tourpanse.models.User;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -47,8 +51,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private EventDataSource eventDataSource;
 
     private Intent intent;
+    private User user;
 
     private int userId;
+    private String name;
     private String city, state, zip, country;
     private double latitude, longitude;
 
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        user = new User();
         saveUserCredentialsToSharedPreference = new SaveUserCredentialsToSharedPreference(MainActivity.this);
         userId = saveUserCredentialsToSharedPreference.getUserCredentials();
         eventDataSource = new EventDataSource(MainActivity.this);
@@ -147,11 +154,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         getCurrentAddress(latitude, longitude);
-        Log.e("Location", "onLocationChanged: " + location.getLatitude() + " " + location.getLongitude());
+        /*Log.e("Location", "onLocationChanged: " + location.getLatitude() + " " + location.getLongitude());
         Log.e("ca", "Current City: "+getCity() );
         Log.e("ca", "Current Country: "+getCountry() );
         Log.e("ca", "Current State: "+getState() );
-        Log.e("ca", "Current Zip: "+getZip() );
+        Log.e("ca", "Current Zip: "+getZip() );*/
     }
 
     @Override
@@ -177,14 +184,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            setCity(addresses.get(0).getLocality());
+            setState(addresses.get(0).getAdminArea());
+            setZip(addresses.get(0).getPostalCode());
+            setCountry(addresses.get(0).getCountryName());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        setCity(addresses.get(0).getLocality());
-        setState(addresses.get(0).getAdminArea());
-        setZip(addresses.get(0).getPostalCode());
-        setCountry(addresses.get(0).getCountryName());
     }
 
     public boolean isNetworkAvailable(Context context)
@@ -194,9 +200,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         return activeNetworkInfo != null;
     }
 
-    public void goToWeather(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.game_menu, menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    public void getWeatherFromMenu(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
         intent.putExtra("city", getCity());
         startActivity(intent);
+    }
+
+    public void getLogoutFromMenu(MenuItem item) {
+        saveUserCredentialsToSharedPreference.saveUserCredentials(0);
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 }
