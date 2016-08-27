@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
@@ -147,6 +148,7 @@ public class PlaceActivity extends AppCompatActivity implements GoogleApiClient.
         ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,placeTypeArray);
         placeTypeSpinner.setAdapter(adapter);
 
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addOnConnectionFailedListener(this)
@@ -175,6 +177,17 @@ public class PlaceActivity extends AppCompatActivity implements GoogleApiClient.
 
                     placeListAdapter = new PlaceListAdapter(PlaceActivity.this, results);
                     placeListView.setAdapter(placeListAdapter);
+
+                    final ArrayList<Result> finalResults = results;
+                    placeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                            Intent mapIntent = new Intent(PlaceActivity.this, MapsActivity.class);
+                            mapIntent.putExtra("lat", finalResults.get(position).getGeometry().getLocation().getLat().toString());
+                            mapIntent.putExtra("lng", finalResults.get(position).getGeometry().getLocation().getLng().toString());
+                            startActivity(mapIntent);
+                        }
+                    });
                 } catch (Exception e){
 
                 }

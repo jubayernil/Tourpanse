@@ -159,9 +159,14 @@ public class AddEventExpenseMoment extends AppCompatActivity {
                     cost += expense.getAmount();
                 }
                 double remainingAmount = Double.parseDouble(event.getEstimatedBudget()) - cost;
-                showEventEstimatedBudgetTV.setText("Budget = " + event.getEstimatedBudget());
-                showEventSpentAmountTV.setText("Spent = " + cost);
-                showRemainingAmountTV.setText("Remaining = " + remainingAmount);
+                showEventEstimatedBudgetTV.setText("Budget\n" + event.getEstimatedBudget());
+                showEventSpentAmountTV.setText("Spent\n" + cost);
+                showRemainingAmountTV.setText("Remaining\n" + remainingAmount);
+                if (remainingAmount > cost){
+                    showRemainingAmountTV.setBackgroundResource(R.color.successGreen);
+                } else {
+                    showRemainingAmountTV.setBackgroundResource(R.color.colorRed);
+                }
 
                 showListOfExpenseOfEvent.setAdapter(expenseAdapter);
                 AlertDialog.Builder showExpensesAlertBuilder = new AlertDialog.Builder(AddEventExpenseMoment.this);

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class PlaceListAdapter extends ArrayAdapter<Result>{
     private Context context;
     private ArrayList<Result> results;
+    double lat, lng;
 
     public PlaceListAdapter(Context context, ArrayList<Result> results) {
         super(context, R.layout.place_list_row ,results);
@@ -48,6 +49,8 @@ public class PlaceListAdapter extends ArrayAdapter<Result>{
         }
             viewHolder.placeNameTv.setText(""+results.get(position).getName());
             viewHolder.placeAddressTv.setText(""+results.get(position).getVicinity());
+        /*lat = results.get(position).getGeometry().getLocation().getLat();
+        lng = results.get(position).getGeometry().getLocation().getLng();*/
 
 
         return convertView;
