@@ -159,12 +159,15 @@ public class AddEventExpenseMoment extends AppCompatActivity {
                     cost += expense.getAmount();
                 }
                 int totalMoney = Integer.parseInt(event.getEstimatedBudget());
+
                 double remainingAmount = Double.parseDouble(event.getEstimatedBudget()) - cost;
                 showEventEstimatedBudgetTV.setText("Budget\n" + event.getEstimatedBudget());
                 showEventSpentAmountTV.setText("Spent\n" + cost);
                 showRemainingAmountTV.setText("Remaining\n" + remainingAmount);
-                if (remainingAmount > cost){
+                if (remainingAmount > (totalMoney/2)){
                     showRemainingAmountTV.setBackgroundResource(R.color.successGreen);
+                } else if (remainingAmount > totalMoney/4){
+                    showRemainingAmountTV.setBackgroundResource(R.color.colorYellow);
                 } else {
                     showRemainingAmountTV.setBackgroundResource(R.color.colorRed);
                 }

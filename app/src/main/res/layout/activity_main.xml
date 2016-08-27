@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:padding="10dp"
-            android:text="Upcoming Tour List User ID: "
+            android:text="Upcoming Tours"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/colorWhite" />
 
@@ -39,6 +39,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center"
             android:padding="10dp"
+            android:visibility="gone"
             android:textColor="@color/colorWhite"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
