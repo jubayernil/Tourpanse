@@ -3,6 +3,7 @@ package com.compiler.tourpanse.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -59,19 +60,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-
-
-        //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        //startActivity(intent);
     }
 
     public void createAccount(View view) {
         Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
         startActivity(intent);
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent Act2Intent = new Intent(this, LoginActivity.class);
+            startActivity(Act2Intent);
+            finish();
+            return true;
+        }
+        return false;
     }
 }

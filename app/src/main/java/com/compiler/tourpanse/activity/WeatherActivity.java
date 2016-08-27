@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.compiler.tourpanse.R;
 import com.compiler.tourpanse.adapter.ForecastListAdapter;
+import com.compiler.tourpanse.helper.SaveUserCredentialsToSharedPreference;
 import com.compiler.tourpanse.pojo.CurrentWeatherResponse;
 import com.compiler.tourpanse.pojo.WeatherForecastResponse;
 import com.compiler.tourpanse.pojo.WeatherList;
@@ -41,6 +46,7 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         weatherImageIv = (ImageView) findViewById(R.id.weatherImageIv);
         tempTv = (TextView) findViewById(R.id.tempTv);
@@ -61,12 +67,9 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
                 CurrentWeatherResponse currentWeatherResponse = response.body();
-                Log.e("Weather", "onResponse: " + currentWeatherResponse.getMain().getTemp() + " City: " + cityName);
-                /*Bundle tempData = new Bundle();
-                tempData.putString("tempData", String.valueOf(currentWeatherResponse.getMain().getTemp()));
-                currentWeatherFragment.setArguments(tempData);*/
+                //Log.e("Weather", "onResponse: " + currentWeatherResponse.getMain().getTemp() + " City: " + cityName);
                 Picasso.with(getApplicationContext()).load(currentWeatherResponse.getWeather().get(0).getIcon()).into(weatherImageIv);
-                tempTv.setText(String.valueOf((int)Math.ceil(currentWeatherResponse.getMain().getTemp())) + (char) 0x00B0 + "C");
+                tempTv.setText(String.valueOf((int) Math.ceil(currentWeatherResponse.getMain().getTemp())) + (char) 0x00B0 + "C");
                 weatherSummaryTv.setText(currentWeatherResponse.getWeather().get(0).getMain());
                 weatherDetailTv.setText(currentWeatherResponse.getWeather().get(0).getDescription());
             }
@@ -88,7 +91,7 @@ public class WeatherActivity extends AppCompatActivity {
                 WeatherForecastResponse wfr = response.body();
                 ArrayList<WeatherList> weatherLists = new ArrayList<WeatherList>();
                 weatherLists = (ArrayList<WeatherList>) wfr.getList();
-//TODO: here to add list view
+
                 adapter = new ForecastListAdapter(WeatherActivity.this, weatherLists);
                 forecastListView.setAdapter(adapter);
                 for (WeatherList weatherList : weatherLists) {
@@ -111,9 +114,41 @@ public class WeatherActivity extends AppCompatActivity {
                 .build();
         weatherServiceApi = retrofit.create(WeatherServiceApi.class);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logoutMenu:
+                SaveUserCredentialsToSharedPreference saveUserCredentialsToSharedPreference = null;
+                saveUserCredentialsToSharedPreference.saveUserCredentials(0);
+                startActivity(new Intent(this, LoginActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent Act2Intent = new Intent(this, MainActivity.class);
+            startActivity(Act2Intent);
+            finish();
+            return true;
+        }
+        return false;
     }
 }

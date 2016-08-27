@@ -45,6 +45,7 @@
     </LinearLayout>
 
     <ListView
+        android:background="@color/colorWhite"
         android:id="@+id/showEventListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,14 +55,13 @@
 
     <ImageButton
         android:id="@+id/addNewEvent"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="18sp"
-        android:background="@color/colorBlack"
         android:onClick="addNewEvent"
-        android:src="@drawable/add_button" />
+        android:src="@drawable/add_button_icom" />
     <!--<ExpandableListView-->
     <!--android:padding="5dp"-->
     <!--android:layout_below="@+id/headingTv"-->

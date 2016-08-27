@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tourpanse</string>
+    <string name="app_name">Tourpense</string>
     <string name="not_register_create_account">Not Register? Create Account</string>
     <string name="full_name">Full Name</string>
     <string name="full_name_hint">Jhon Cena</string>

@@ -3,6 +3,7 @@ package com.compiler.tourpanse.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         userDataSource = new UserDataSource(RegistrationActivity.this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fullNameEt = (EditText) findViewById(R.id.fullNameEt);
         phoneNumberEt = (EditText) findViewById(R.id.phoneNumberEt);
@@ -106,15 +108,21 @@ public class RegistrationActivity extends AppCompatActivity {
            }
        }
 
-
-
-       //intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-        //startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent Act2Intent = new Intent(this, LoginActivity.class);
+            startActivity(Act2Intent);
+            finish();
+            return true;
+        }
+        return false;
     }
 }

@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private String name;
     private String city, state, zip, country;
     private double latitude, longitude;
+
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
 
     public String getCity() {
         return city;
@@ -193,8 +197,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-    public boolean isNetworkAvailable(Context context)
-    {
+    public boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null;
@@ -208,23 +211,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
-    /*public void getWeatherFromMenu(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
-        intent.putExtra("city", getCity());
-        startActivity(intent);
-    }
-
-    public void getLogoutFromMenu(MenuItem item) {
-        saveUserCredentialsToSharedPreference.saveUserCredentials(0);
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-    }*/
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.weatherMenu:
@@ -232,17 +218,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 intent.putExtra("city", getCity());
                 startActivity(intent);
                 return true;
-
             case R.id.logoutMenu:
                 saveUserCredentialsToSharedPreference.saveUserCredentials(0);
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent Act2Intent = new Intent(this, MainActivity.class);
+            startActivity(Act2Intent);
+            finish();
+            return true;
+        }
+        return false;
     }
 }
